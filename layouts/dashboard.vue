@@ -9,7 +9,7 @@ const currentTab = computed(() => useRoute().params.tab);
     <div
       tag="div"
       role="tablist"
-      class="tabs tabs-lg tabs-boxed border-4 border-b-primary"
+      class="tabs tabs-lg tabs-boxed border-4 border-b-primary sticky"
     >
       <NuxtLink
         to="/dashboard/upcoming"

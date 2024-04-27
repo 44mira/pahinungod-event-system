@@ -4,7 +4,6 @@ definePageMeta({
 });
 
 const route = useRoute().params.tab;
-const eventKeys = ["id", "name", "desc", "status"];
 
 // dummy
 const events: EventData[] = [
@@ -36,16 +35,7 @@ const displayedEvents = computed(() => {
         <div class="card-body bg-primary">
           <h2 class="card-title">
             {{ event.name }}
-            <div
-              class="badge"
-              :class="{
-                'badge-success': event.status === 'active',
-                'badge-warning': event.status === 'upcoming',
-                'badge-error': event.status === 'past',
-              }"
-            >
-              {{ event.status.toUpperCase() }}
-            </div>
+            <StatusBadge :eventStatus="event.status" />
           </h2>
           <p>{{ event.desc }}</p>
         </div>
@@ -61,39 +51,6 @@ const displayedEvents = computed(() => {
         {{ index }}
       </a>
     </div>
-
-    <div class="overflow-x-auto bg-primary">
-      <table class="table table-zebra">
-        <!-- head -->
-        <thead>
-          <tr>
-            <th></th>
-            <th v-for="(key, index) in eventKeys" :key="index">
-              {{ key.toUpperCase() }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(event, index) in displayedEvents">
-            <th>{{ index + 1 }}</th>
-            <th>{{ event.id }}</th>
-            <td>{{ event.name }}</td>
-            <td>{{ event.desc }}</td>
-            <td>
-              <div
-                class="badge"
-                :class="{
-                  'badge-success': event.status === 'active',
-                  'badge-warning': event.status === 'upcoming',
-                  'badge-error': event.status === 'past',
-                }"
-              >
-                {{ event.status.toUpperCase() }}
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <EventTable :route="route" :displayedEvents="displayedEvents" />
   </div>
 </template>
