@@ -26,7 +26,7 @@ onMounted(() => {
 
 <template>
   <div class="w-full bg-base flex flex-col items-center">
-    <div class="carousel carousel-center space-x-4 bg-base w-fit">
+    <div class="carousel carousel-center space-x-4 bg-base w-96">
       <div
         v-for="(event, index) in events"
         class="carousel-item card w-96 rounded-xl"

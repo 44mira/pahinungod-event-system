@@ -22,7 +22,7 @@ function displayModal(index) {
 </script>
 
 <template>
-  <div class="bg-primary w-screen">
+  <div class="bg-primary w-9/12 overflow-x-auto">
     <table class="table">
       <!-- head -->
       <thead>
