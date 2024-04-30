@@ -26,7 +26,11 @@ function displayModal(index) {
     <table class="table table-pin-rows">
       <!-- head -->
       <thead>
-        <th v-for="(key, index) in eventKeys" :key="index">
+        <th
+          v-for="(key, index) in eventKeys"
+          :key="index"
+          class="bg-accent text-accent-content"
+        >
           {{ key.toUpperCase() }}
         </th>
       </thead>
