@@ -12,6 +12,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.42.7",
     "@vorms/core": "^1.1.0",
+    "@vorms/resolvers": "^1.1.0",
     "daisyui": "^4.10.2",
     "nuxt": "^3.11.2",
     "vue": "^3.4.21",
