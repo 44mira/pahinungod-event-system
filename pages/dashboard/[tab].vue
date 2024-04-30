@@ -1,5 +1,5 @@
 <script setup>
-import { defineAsyncComponent } from "vue";
+import { provide } from "vue";
 import { createClient } from "@supabase/supabase-js";
 const config = useRuntimeConfig().public;
 
@@ -8,6 +8,7 @@ definePageMeta({
 });
 
 const supabase = createClient(config.supabaseUrl, config.supabaseKey);
+provide("supabase", supabase);
 
 const route = useRoute().params.tab;
 

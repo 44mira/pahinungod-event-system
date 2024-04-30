@@ -18,9 +18,9 @@ const showModal = ref(false);
   </button>
 
   <dialog class="modal" :class="{ 'modal-open': showModal }">
-    <div class="modal-box">
+    <div class="modal-box max-w-screen-lg">
       <h3 class="font-bold text-lg">Create new event</h3>
-      <p class="py-4">Press ESC key or click the button below to close</p>
+      <CreateEventForm @create="showModal = false" />
       <div class="modal-action">
         <button class="btn" @click="showModal = false">Close</button>
       </div>
