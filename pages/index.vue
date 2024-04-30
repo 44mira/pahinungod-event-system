@@ -1,9 +1,7 @@
-<script setup lang="ts">
+<script setup>
 definePageMeta({
-  layout: 'dashboard'
-})
+  layout: "dashboard",
+});
 </script>
 
-<template>
-  Landing page!
-</template>
+<template>Landing page!</template>
