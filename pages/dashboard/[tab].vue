@@ -1,4 +1,5 @@
-<script setup lang="ts">
+<script setup>
+import { provide } from "vue";
 import { createClient } from "@supabase/supabase-js";
 const config = useRuntimeConfig().public;
 
@@ -7,26 +8,24 @@ definePageMeta({
 });
 
 const supabase = createClient(config.supabaseUrl, config.supabaseKey);
+provide("supabase", supabase);
 
 const route = useRoute().params.tab;
-const events = ref([]);
 
-async function getEvents() {
+const { data: events, pending } = await useAsyncData(async () => {
   const { data } = await supabase
     .from("events")
     .select("*")
     .eq("status", route);
-  events.value = data;
-}
-
-onMounted(() => {
-  getEvents();
+  return data;
 });
 </script>
 
 <template>
   <div class="w-full bg-base flex flex-col items-center">
-    <div class="carousel carousel-center space-x-4 bg-base w-96">
+    <div
+      class="carousel carousel-center space-x-4 bg-base w-96 border rounded-lg"
+    >
       <div
         v-for="(event, index) in events"
         class="carousel-item card w-96 rounded-xl"
@@ -50,7 +49,6 @@ onMounted(() => {
         </div>
       </div>
     </div>
-
     <div class="flex justify-center w-full py-2 gap-2">
       <a
         v-for="index in events.length"
@@ -60,6 +58,14 @@ onMounted(() => {
         {{ index }}
       </a>
     </div>
-    <EventTable :route="route" :displayedEvents="events" />
+    <div class="flex flex-col gap-3 w-9/12">
+      <CreateEvent />
+      <div v-if="pending">
+        <div class="skeleton w-full h-52" />
+      </div>
+      <div v-else>
+        <EventTable :route="route" :displayedEvents="events" />
+      </div>
+    </div>
   </div>
 </template>

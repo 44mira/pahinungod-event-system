@@ -22,15 +22,17 @@ function displayModal(index) {
 </script>
 
 <template>
-  <div class="bg-primary w-9/12 overflow-x-auto">
-    <table class="table">
+  <div class="bg-primary w-full overflow-x-auto border rounded-xl">
+    <table class="table table-pin-rows">
       <!-- head -->
       <thead>
-        <tr>
-          <th v-for="(key, index) in eventKeys" :key="index">
-            {{ key.toUpperCase() }}
-          </th>
-        </tr>
+        <th
+          v-for="(key, index) in eventKeys"
+          :key="index"
+          class="bg-accent text-accent-content"
+        >
+          {{ key.toUpperCase() }}
+        </th>
       </thead>
       <tbody>
         <tr
@@ -49,6 +51,7 @@ function displayModal(index) {
           <td>{{ event.description }}</td>
           <td><StatusBadge :eventStatus="event.status" /></td>
 
+          <!-- Modal -->
           <dialog
             class="modal modal-bottom sm:modal-middle"
             :class="{ 'modal-open': modalList[index] }"
@@ -74,5 +77,21 @@ function displayModal(index) {
         </tr>
       </tbody>
     </table>
+  </div>
+  <div v-if="displayedEvents.length === 0" class="alert alert-info mt-5">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      class="stroke-current shrink-0 w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+      ></path>
+    </svg>
+    This category is empty!
   </div>
 </template>
